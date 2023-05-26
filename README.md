@@ -36,7 +36,7 @@ My own lib of usefull function
  - ft_putnbr_fd : putchar for numbers
  - ft_putstr_fd : putendl_fd without '\n'
  - ft_rev_int_tab : do a 180 to your int tab 1234 -> 4321
- - ft_split : separate a string by word (character separated by whitespace or start/end of the string) and return a array of string containing them
+ - ft_split : separate a string by word(char separated by whitespace or start/end of the string) and return a array of string containing them
  - ft_strchr : ft_memchr for strings
  - ft_strdup : copying your string allocating space for it
  - ft_striteri : apply the function passed to every character of the string
