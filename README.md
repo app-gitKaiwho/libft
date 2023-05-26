@@ -28,4 +28,27 @@ My own lib of usefull function
  - ft_memchr : if char c is contain in string return a point to the position of the first char c
  - ft_memcmp : return the difference between the first different occuring
  - ft_memecpy : copy src into dst but does not allocate
- - 
+ - ft_memove : copy src into dst by n character but taking into account overlapping memory regions
+ - ft_memset : ft_bezero but with your character of choice
+ - ft_power : return nb to the power of power
+ - ft_putchar_fd : write a char in a open file
+ - ft_putendl_fd : putchar for a string + a '\n'
+ - ft_putnbr_fd : putchar for numbers
+ - ft_putstr_fd : putendl_fd without '\n'
+ - ft_rev_int_tab : do a 180 to your int tab 1234 -> 4321
+ - ft_split : separate a string by word (character separated by whitespace or start/end of the string) and return a array of string containing them
+ - ft_strchr : ft_memchr for strings
+ - ft_strdup : copying your string allocating space for it
+ - ft_striteri : apply the function passed to every character of the string
+ - ft_strjoin : glue to string making allocating space for it
+ - ft_strlcat : a strjoin with a size limit that makes sure the string is null terminated
+ - ft_strlcpy : memcpy but with a size and for string
+ - ft_strlen : return the size of a string
+ - ft_strmapi : striteri but return a new string without altering the original one
+ - ft_strncmp : memcpm for string making sure to not segfault
+ - ft_strrchr : memchr for string
+ - ft_strtrim : remove unwanted character for the beginin and the end of a string
+ - ft_substr : copy a sub string allocating space for it
+ - ft_swap : intervert the value of to int
+ - ft_tolower : GOES FROM to this
+ - ft_toupper : goes from TO THIS
