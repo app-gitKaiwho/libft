@@ -34,6 +34,8 @@ int	printfmain(char c, va_list args)
 		val = (printc('%'));
 	else if (c == 'p')
 		val = (printptr(va_arg(args, void *)));
+	else if (c == 'f')
+		val = (printdouble(va_arg(args, double)));
 	return (val);
 }
 
