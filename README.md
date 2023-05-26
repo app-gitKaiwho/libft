@@ -10,7 +10,7 @@ My own lib of usefull function
  - unsigned (%u)
  - hexadecimal (%x for lowcase %X for uppercase)
  - pointer (%p)
- - double (%f) (usable but less precis) <br> 
+ - double (%f) (usable but less accurate) <br> 
  outside of being a less printf it does not uses buffer which can be usefull in some cases
  ### GNL
  Give one line after the next of a file
