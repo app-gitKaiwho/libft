@@ -6,7 +6,7 @@
 #    By: lvon-war <lvonwar42@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/25 16:51:48 by lvon-war          #+#    #+#              #
-#    Updated: 2023/05/26 11:07:40 by lvon-war         ###   ########.fr        #
+#    Updated: 2023/11/27 18:59:43 by lvon-war         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ FILES	+=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c
 			ft_strlcat.c ft_strlen.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_tolower.c ft_substr.c ft_strjoin.c \
 			ft_strtrim.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_toupper.c ft_split.c \
 			ft_itoa.c ft_strmapi.c ft_striteri.c ft_is_whitespace.c ft_power.c ft_swap.c ft_abs.c ft_listmanip.c\
-			ft_rev_int_tab.c
+			ft_rev_int_tab.c ft_strstartw.c
 FILES	+=	get_next_line.c
 all : $(NAME)
 

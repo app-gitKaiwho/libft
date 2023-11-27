@@ -28,34 +28,36 @@ int	printunbr(unsigned int n)
 	return (i);
 }
 
-int printsubone(double n, int msvp)
+int	printsubone(double n, int msvp)
 {
-	int lsvp;
-	int size;
-	int i;
+	int	lsvp;
+	int	size;
+	int	i;
 
 	i = 0;
 	lsvp = 0;
 	size = 0;
-	while(i++ < msvp)
+	while (i++ < msvp)
 		size += printc('0');
 	size += printnbr(n * ft_power(10, 6));
 	return (size);
 }
-int printdouble(double n)
+
+int	printdouble(double n)
 {
-	int i;
-	int j;
-	int size;
-	int over;
-	double under;
+	int		i;
+	int		j;
+	int		size;
+	int		over;
+	double	under;
 
 	i = 0;
 	over = (int)n;
 	size = printnbr(over);
 	size += printc('.');
 	under = n - over;
-	while ((int)(under * ft_power(10, i)) <= 0 && i++ < 20);
+	while
+	((int)(under * ft_power(10, i)) <= 0 && i++ < 20);
 	if (i >= 10)
 		size += printstr("00");
 	else
