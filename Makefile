@@ -3,12 +3,26 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lvon-war <lvonwar42@gmail.com>             +#+  +:+       +#+         #
+#    By: lvon-war <lvon-war@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/25 16:51:48 by lvon-war          #+#    #+#              #
-#    Updated: 2023/11/27 18:59:43 by lvon-war         ###   ########.fr        #
+#    Updated: 2024/03/01 11:57:47 by lvon-war         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+RED=\033[0;31m
+BLUE=\033[0;34m
+GREEN=\033[0;32m
+YELLOW=\033[0;33m
+NC=\033[0m
+
+define spinner
+    while :; do for s in ◡ ⊙ ◠; do printf "\r${BLUE}%s${NC} %s %s %s %s" "$$s" "$1"; sleep 0.1; done; done
+endef
+
+define end_spinner
+	printf "\r${GREEN}%s${NC}%s\n" "✓"
+endef
 
 # Executable Name 
 NAME	=	lib.a
@@ -22,6 +36,7 @@ FILES	+=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c
 			ft_itoa.c ft_strmapi.c ft_striteri.c ft_is_whitespace.c ft_power.c ft_swap.c ft_abs.c ft_listmanip.c\
 			ft_rev_int_tab.c ft_strstartw.c
 FILES	+=	get_next_line.c
+
 all : $(NAME)
 
 # Path for .c , .h and .o Files 
@@ -31,36 +46,50 @@ GNLSRC_PATH := ./GNL_SRCS/
 OBJ_PATH := ./OBJ/
 INC_PATH := -I ./include
 
+ifeq ($(shell uname),Darwin)
+	ECHOFLAG :=
+else
+	ECHOFLAG := -e
+endif
+
 # Files to compile
 OBJ1 := $(FILES:.c=.o)
 OBJ := $(patsubst %,$(OBJ_PATH)%,$(OBJ1))
 
 # Build .o first
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@echo [CC] $<
-	@$(CC) $(C_FLAGS) -o $@ -c $< $(INC_PATH)     
+	@$(CC) $(C_FLAGS) -o $@ -c $< $(INC_PATH) && printf "[${@}]                  "
+	@sleep 0.1
 
 $(OBJ_PATH)%.o: $(GNLSRC_PATH)%.c
-	@echo [CC] $<
-	@$(CC) $(C_FLAGS) -o $@ -c $< $(INC_PATH)  
+	@$(CC) $(C_FLAGS) -o $@ -c $< $(INC_PATH) && printf "[${@}]                  "
+	@sleep 0.1
 
 $(OBJ_PATH)%.o: $(PFSRC_PATH)%.c
-	@echo [CC] $<
-	@$(CC) $(C_FLAGS) -o $@ -c $< $(INC_PATH)          
+	@$(CC) $(C_FLAGS) -o $@ -c $< $(INC_PATH) && printf "[${@}]                  "
+	@sleep 0.1
 
 # Build final Binary
-$(NAME): $(OBJ)
-	@echo [INFO] Creating Binary Executable [$(NAME)]
-	$(AR) $(NAME) $(OBJ) $(LINKFLAGS)
+$(NAME): $
+	@echo $(ECHOFLAG) "[${GREEN}Compliling${NC}]"
+	@$(call spinner, "Creating .o files...") & SPIN_PID=$$! ; \
+	$(MAKE) -s $(OBJ) & COMP_PID=$$! ; \
+	wait $$COMP_PID ; kill $$SPIN_PID ; $(call end_spinner) ; \
+
+
+	@$(call spinner, "Building Archive...[$(NAME)]") & SPIN_PID=$$! ; \
+	$(AR) $(NAME) $(OBJ) & COMP_PID=$$! ; \
+	sleep 0.1 ; \
+	wait $$COMP_PID ; kill $$SPIN_PID ; $(call end_spinner)
 
 # Clean all the object files and the binary
 clean:   
-	@echo "[Cleaning]"
-	@$(RM) -rfv $(OBJ_PATH)*
+	@echo $(ECHOFLAG) "[${GREEN}Cleaning${NC}]"
+	@$(RM) -rfv $(OBJ_PATH)* | while read -r line; do echo $(ECHOFLAG) "${RED}-  ${NC}$$line"; done
 
 fclean: clean
-		@$(RM) -rfv $(NAME)
-		@$(RM) -rfv test.out
+		@$(RM) -rfv $(NAME) | echo $(ECHOFLAG) "${RED}- ${NC} ${NAME}";
+		@$(RM) -rfv test.out |  echo $(ECHOFLAG) "${RED}- ${NC} test.out";
 
 re: fclean all
 
