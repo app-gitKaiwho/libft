@@ -51,5 +51,5 @@ My own lib of usefull function
  - ft_strtrim : remove unwanted character for the beginin and the end of a string
  - ft_substr : copy a sub string allocating space for it
  - ft_swap : intervert the value of to int
- - ft_tolower : GOES FROM, to this
- - ft_toupper : goes from, TO THIS
+ - ft_tolower : GOES FROM THIS, to this
+ - ft_toupper : goes from this, TO THIS
