@@ -6,7 +6,7 @@
 #    By: lvon-war <lvon-war@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/25 16:51:48 by lvon-war          #+#    #+#              #
-#    Updated: 2024/03/01 11:57:47 by lvon-war         ###   ########.fr        #
+#    Updated: 2024/03/04 11:10:30 by lvon-war         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,8 +93,8 @@ fclean: clean
 
 re: fclean all
 
-test : all
+test: all
 	gcc main.c $(NAME) $(C_FLAGS) -o test.out
 	./test.out
 
-.PHONY : clean fclean re
+.PHONY : clean fclean re normi
