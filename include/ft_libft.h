@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_libft.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvon-war <lvonwar42@gmail.com>             +#+  +:+       +#+        */
+/*   By: lvon-war <lvon-war@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 13:50:06 by lvon-war          #+#    #+#             */
-/*   Updated: 2023/11/27 18:58:59 by lvon-war         ###   ########.fr       */
+/*   Updated: 2024/03/11 10:06:15 by lvon-war         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	*ft_bzero(void *s, size_t n);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
+char	*ft_strjoinmore(int count, ...);
 int		ft_strstartw(char *str, char c);
 char	**ft_split(char const *s, char c);
 void	*ft_calloc(size_t n, size_t size);

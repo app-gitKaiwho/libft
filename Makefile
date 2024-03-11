@@ -6,7 +6,7 @@
 #    By: lvon-war <lvon-war@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/25 16:51:48 by lvon-war          #+#    #+#              #
-#    Updated: 2024/03/04 11:10:30 by lvon-war         ###   ########.fr        #
+#    Updated: 2024/03/11 10:10:40 by lvon-war         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,14 @@ BLUE=\033[0;34m
 GREEN=\033[0;32m
 YELLOW=\033[0;33m
 NC=\033[0m
+CLEAR=\033[2K
 
 define spinner
-    while :; do for s in ◡ ⊙ ◠; do printf "\r${BLUE}%s${NC} %s %s %s %s" "$$s" "$1"; sleep 0.1; done; done
+    while :; do for s in ◡ ⊙ ◠; do printf "\r${CLEAR}${BLUE}%s${NC} %s %s %s %s" "$$s" "$1"; sleep 0.1; done; done
 endef
 
 define end_spinner
-	printf "\r${GREEN}%s${NC}%s\n" "✓"
+	printf "\r${CLEAR}${GREEN}✓${NC}%s %s %s\n" "$1"
 endef
 
 # Executable Name 
@@ -56,31 +57,37 @@ endif
 OBJ1 := $(FILES:.c=.o)
 OBJ := $(patsubst %,$(OBJ_PATH)%,$(OBJ1))
 
-# Build .o first
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@$(CC) $(C_FLAGS) -o $@ -c $< $(INC_PATH) && printf "[${@}]                  "
-	@sleep 0.1
+$(NAME): update_obj
 
-$(OBJ_PATH)%.o: $(GNLSRC_PATH)%.c
-	@$(CC) $(C_FLAGS) -o $@ -c $< $(INC_PATH) && printf "[${@}]                  "
-	@sleep 0.1
+update_obj:
+	@$(MAKE) -s create_obj
+	@$(MAKE) -s buid_arch
 
-$(OBJ_PATH)%.o: $(PFSRC_PATH)%.c
-	@$(CC) $(C_FLAGS) -o $@ -c $< $(INC_PATH) && printf "[${@}]                  "
-	@sleep 0.1
-
-# Build final Binary
-$(NAME): $
+create_obj:
 	@echo $(ECHOFLAG) "[${GREEN}Compliling${NC}]"
 	@$(call spinner, "Creating .o files...") & SPIN_PID=$$! ; \
 	$(MAKE) -s $(OBJ) & COMP_PID=$$! ; \
-	wait $$COMP_PID ; kill $$SPIN_PID ; $(call end_spinner) ; \
+	wait $$COMP_PID ; kill $$SPIN_PID ; \
+	$(call end_spinner, "Object Made Successfully!")
+	
+buid_arch:
+	@$(call spinner, "Building Archive...") & SPIN_PID=$$! ; \
+	$(AR) $(NAME) $(OBJ) $(LINKFLAGS) & COMP_PID=$$! ; \
+	wait $$COMP_PID ; kill $$SPIN_PID; \
+	$(call end_spinner, "Archive Built Successfully!")
 
+# Build .o first
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@$(CC) $(C_FLAGS) -o $@ -c $< $(INC_PATH) && printf "[${@}]"
+	@sleep 0.1
 
-	@$(call spinner, "Building Archive...[$(NAME)]") & SPIN_PID=$$! ; \
-	$(AR) $(NAME) $(OBJ) & COMP_PID=$$! ; \
-	sleep 0.1 ; \
-	wait $$COMP_PID ; kill $$SPIN_PID ; $(call end_spinner)
+$(OBJ_PATH)%.o: $(GNLSRC_PATH)%.c
+	@$(CC) $(C_FLAGS) -o $@ -c $< $(INC_PATH) && printf "[${@}]"
+	@sleep 0.1
+
+$(OBJ_PATH)%.o: $(PFSRC_PATH)%.c
+	@$(CC) $(C_FLAGS) -o $@ -c $< $(INC_PATH) && printf "[${@}]"
+	@sleep 0.1
 
 # Clean all the object files and the binary
 clean:   

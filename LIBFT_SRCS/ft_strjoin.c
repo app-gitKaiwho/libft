@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "ft_libft.h"
+#include "ft_printf.h"
+#include <stdarg.h>
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
@@ -27,4 +29,39 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	ft_memcpy(res + leni, s2, lenj);
 	res[leni + lenj] = '\0';
 	return (res);
+}
+
+/// @brief join as many string as you want.
+/// @param count number of strings to join.
+/// @param strings to join only, behavior is undefined for anything else.
+/// @return  null if less than 2 strings are given, fused string otherwise.
+/// but if a null is passed, the function will stop and return the fused string,
+/// up to the null.
+char	*ft_strjoinmore(int count, ...)
+{
+	va_list	args;
+	char	*flip;
+	char	*flop;
+	char	*tmp;
+	int		i;
+
+	flip = NULL;
+	va_start (args, count);
+	i = 2;
+	if (count >= 2)
+		flip = ft_strjoin(va_arg(args, char *), va_arg(args, char *));
+	while (i < count)
+	{
+		tmp = va_arg(args, char *);
+		if (!tmp)
+			break ;
+		flop = ft_strjoin(flip, tmp);
+		if (flip)
+		{
+			free(flip);
+			flip = flop;
+		}
+		i++;
+	}
+	return (flip);
 }
